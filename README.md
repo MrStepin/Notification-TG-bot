@@ -16,4 +16,4 @@ Like this: ```token="Token 8e64"
 For example:  
 ```python dvmn_chat_bot.py```
 
-Script will work 100 sec. Notification will be send to you in telegram if task will be checked during this time.
+Notification will be send to you in telegram if task will be checked.
