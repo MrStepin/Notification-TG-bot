@@ -14,6 +14,6 @@ Like this: ```token="Token 8e64"
               chat_id="315552"```  
 * Execute this script in CMD.
 For example:  
-```ChatBot.py"```
+```python dvmn_chat_bot.py```
 
 Script will work 100 sec. Notification will be send to you in telegram if task will be checked during this time.
