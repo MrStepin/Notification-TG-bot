@@ -19,7 +19,6 @@ while True:
         response.raise_for_status()
         response_status = response.json()
         if response_status['status'] == 'timeout':
-            time.sleep(5)
             api_request_params = {"timestamp":response_status['timestamp_to_request']}
         else:
             lesson = response_status['new_attempts'][0]
@@ -28,7 +27,6 @@ while True:
             message = (f"Преподаватель проверил работу: \n {lesson_name} \n Ссылка на задачу: https://dvmn.org{lesson_url}")
             bot = telegram.Bot(token=telegram_bot_token)    
             bot.send_message(chat_id=chat_id, text=message)
-            time.sleep(5)
             api_request_params = {"timestamp":response_status['last_attempt_timestamp']}   	
     except requests.exceptions.ReadTimeout:
         print("There are no answer from the server at this moment. Waiting a response, please wait.")
