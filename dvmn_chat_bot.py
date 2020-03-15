@@ -6,9 +6,9 @@ import time
 import telegram 
 
 load_dotenv()
-token = os.getenv("TOKEN")
-telegram_bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
-chat_id = os.getenv("CHAT_ID")
+token = os.environ["TOKEN"]
+telegram_bot_token = os.environ["TELEGRAM_BOT_TOKEN"]
+chat_id = os.environ["CHAT_ID"]
 DVMN_API = "https://dvmn.org/api/long_polling/"
 headers = {"Authorization": token}
 api_request_params = {"timestamp":int(time.time())}
