@@ -4,6 +4,7 @@ import requests
 import datetime
 import time
 import telegram 
+import logging
 
 load_dotenv()
 token = os.environ["TOKEN"]
@@ -12,6 +13,13 @@ chat_id = os.environ["CHAT_ID"]
 DVMN_API = "https://dvmn.org/api/long_polling/"
 headers = {"Authorization": token}
 api_request_params = {"timestamp":int(time.time())}
+
+class MyLogsHandler(logging.Handler):
+
+    def emit(self, record):
+        log_entry = self.format(record)
+        bot = telegram.Bot(token=telegram_bot_token) 
+        bot.send_message(chat_id=chat_id, text=log_entry)
 
 while True:
     try:
@@ -28,10 +36,8 @@ while True:
             bot = telegram.Bot(token=telegram_bot_token)    
             bot.send_message(chat_id=chat_id, text=message)
             api_request_params = {"timestamp":response_status['last_attempt_timestamp']}   	
-    except requests.exceptions.ReadTimeout:
-        print("There are no answer from the server at this moment. Waiting a response, please wait.")
-        pass
-    except requests.exceptions.ConnectionError:    
-        print("There are no answer from the server at this moment due to internet connection problem.")
-        pass
-
+    except Exception:
+        logger = logging.getLogger("Logger")
+        logger.addHandler(MyLogsHandler())
+        logger.exception(logger)
+        
