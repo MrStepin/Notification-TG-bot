@@ -11,9 +11,11 @@ Use pip to install dependencies:
 ## Environment variables: 
 Create file  ```.env``` with you dvmn.org TOKEN, TELEGRAM_BOT_TOKEN, CHAT_ID.  
 Like this:  
-```TOKEN="Token 8e64"  
+```
+TOKEN="Token 8e64"  
 TELEGRAM_BOT_TOKEN="90303613:AA353458O4"  
-CHAT_ID="315552"```  
+CHAT_ID="315552"
+```  
 
 ## Run              
 Execute this script in CMD.
