@@ -13,7 +13,6 @@ class MyLogsHandler(logging.Handler):
         bot.send_message(chat_id=chat_id, text=log_entry)
 
 logger = logging.getLogger("Logger")
-logger.addHandler(MyLogsHandler())
 
         
 if __name__ == '__main__':         
@@ -27,15 +26,17 @@ if __name__ == '__main__':
     telegram_bot_token = os.environ["TELEGRAM_BOT_TOKEN"]
 
     bot = telegram.Bot(token=telegram_bot_token) 
+    logger.addHandler(MyLogsHandler())
 
     while True:
         try:
             try:
+                time.sleep(2)
                 response = requests.get(DVMN_API, params=api_request_params, headers=headers, timeout=100)
                 response.raise_for_status()
                 devman_server_response = response.json()
                 if devman_server_response['status'] == 'timeout':
-                    api_request_params = {"timestamp": devman_server_response['timestamp_to_request'] + 2}
+                    api_request_params = {"timestamp": devman_server_response['timestamp_to_request']}
             except requests.exceptions.ReadTimeout:
                 pass        
             else:
